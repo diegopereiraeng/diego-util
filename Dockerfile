@@ -1,7 +1,8 @@
 FROM python:3.8-slim-buster
 
 # Install utils
-RUN apt-get update && apt-get install -y curl unzip groff less tzdata keyboard-configuration
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get install -y tzdata keyboard-configuration
+RUN apt-get install -y curl unzip groff less
 
 # install yq - a YAML query command line tool
 RUN curl -Lso yq https://github.com/mikefarah/yq/releases/download/2.2.1/yq_linux_amd64 && \
