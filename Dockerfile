@@ -17,4 +17,7 @@ RUN	unzip awscliv2.zip && ./aws/install
 
 
 COPY requirements.txt requirements.txt
+
+COPY create-harness-secret.py create-harness-secret.py
+
 RUN pip3 install -r requirements.txt
