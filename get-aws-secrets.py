@@ -81,6 +81,9 @@ def get_secret():
     # Parse the secret value into a dictionary
     secret_dict = json.loads(secret_value)
 
+    # Convert the dictionary back to a JSON string with double quotes
+    secret_json = json.dumps(secret_dict)
+    print(secret_json)
     
 
     # identifier = os.getenv("SECRET_NAME", "change_it").replace("-","_").replace(" ","_")
@@ -88,16 +91,16 @@ def get_secret():
     tags = os.getenv("SECRET_TAGS", defaul_tags)
     description = os.getenv("SECRET_DESCRIPTION", "Temp secret")
     identifier = secret_name.replace("-","_").replace(" ","_").replace("/","_")
-    create_secret( secret_name.replace("/","_"), secret_value, identifier, tags, description)
-    
+    create_secret( secret_name.replace("/","_"), secret_json, identifier, tags, description)
+    os.environ['AWS_SECRETS'] = identifier
 
     # Iterate over each key-value pair in the secret
-    # for key, value in secret_dict.items():
+    for key, value in secret_dict.items():
         
-    #     print(f"Key: {key}, Value: {value}")
+        print(f"Key: {key}, Value: {value}")
 
-    #     identifier = key.replace("-","_").replace(" ","_")
-        #create_secret( key, value, identifier, tags, description)
+        identifier = key.replace("-","_").replace(" ","_").replace("/","_")
+        create_secret( key, value, identifier, tags, description)
 
     # Your code goes here.
 
@@ -105,3 +108,4 @@ def get_secret():
 # name = os.getenv("SECRET_NAME", "change-it")
 # value = os.getenv("SECRET_VALUE","change-it")
 get_secret()
+print( os.getenv("AWS_SECRETS", "nothing found"))
