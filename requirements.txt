@@ -3,3 +3,4 @@ botocore
 requests
 python-dotenv
 json
+os
