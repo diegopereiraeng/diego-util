@@ -87,15 +87,16 @@ def get_secret():
     defaul_tags = {"provisioned-by": "harness", "type": "temporary"}
     tags = os.getenv("SECRET_TAGS", defaul_tags)
     description = os.getenv("SECRET_DESCRIPTION", "Temp secret")
-
+    identifier = secret_name.replace("-","_").replace(" ","_").replace("/","_")
+    create_secret( secret_name.replace("/","_"), secret_value, identifier, tags, description)
     
 
     # Iterate over each key-value pair in the secret
-    for key, value in secret_dict.items():
+    # for key, value in secret_dict.items():
         
-        print(f"Key: {key}, Value: {value}")
+    #     print(f"Key: {key}, Value: {value}")
 
-        identifier = key.replace("-","_").replace(" ","_")
+    #     identifier = key.replace("-","_").replace(" ","_")
         #create_secret( key, value, identifier, tags, description)
 
     # Your code goes here.
